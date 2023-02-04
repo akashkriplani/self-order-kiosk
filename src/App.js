@@ -1,6 +1,8 @@
 import { Container, CssBaseline, Paper, ThemeProvider } from '@material-ui/core';
-import HomeScreen from './screens/HomeScreen';
 import { createTheme } from '@material-ui/core/styles';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ChooseScreen from './screens/ChooseScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const theme = createTheme({
   typography: {
@@ -25,14 +27,19 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth="sm">
-        <Paper>
-          <HomeScreen></HomeScreen>
-        </Paper>
-      </Container>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="sm">
+          <Paper>
+            <Routes>
+              <Route path="/" element={<HomeScreen />} exact></Route>
+              <Route path="/choose" element={<ChooseScreen />} exact></Route>
+            </Routes>
+          </Paper>
+        </Container>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
