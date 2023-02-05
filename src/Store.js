@@ -1,9 +1,10 @@
 import React, { createContext, useReducer } from 'react';
-import { ORDER_SET_TYPE } from './Constants';
+import { CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, CATEGORY_LIST_FAILURE, ORDER_SET_TYPE } from './Constants';
 
 export const Store = createContext();
 
 const initialState = {
+  categoryList: { loading: true, categories: [], error: '' },
   order: {
     orderType: 'Eat in'
   }
@@ -15,6 +16,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         order: { ...state.order, orderType: action.payload }
+      };
+    case CATEGORY_LIST_REQUEST:
+      return {
+        ...state,
+        categoryList: { loading: true }
+      };
+    case CATEGORY_LIST_SUCCESS:
+      return {
+        ...state,
+        categoryList: { loading: false, categories: action.payload, error: '' }
+      };
+    case CATEGORY_LIST_FAILURE:
+      return {
+        ...state,
+        categoryList: { loading: false, error: action.payload }
       };
     default:
       return state;
