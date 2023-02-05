@@ -12,12 +12,16 @@ const theme = createTheme({
     },
     h2: {
       fontSize: '2rem',
-      color: 'black'
+      color: 'black',
+      fontWeight: 'bold'
     },
     h3: {
       fontSize: '1.8rem',
       fontWeight: 'bold',
       color: 'white'
+    },
+    body2: {
+      fontWeight: 'bold'
     }
   },
   palette: {
