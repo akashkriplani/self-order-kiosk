@@ -3,6 +3,7 @@ import { createTheme } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ChooseScreen from './screens/ChooseScreen';
 import HomeScreen from './screens/HomeScreen';
+import OrderScreen from './screens/OrderScreen';
 
 const theme = createTheme({
   typography: {
@@ -35,6 +36,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomeScreen />} exact></Route>
               <Route path="/choose" element={<ChooseScreen />} exact></Route>
+              <Route path="/order" element={<OrderScreen />} exact></Route>
             </Routes>
           </Paper>
         </Container>
