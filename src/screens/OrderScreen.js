@@ -36,7 +36,6 @@ export default function OrderScreen() {
 
   const categoryClickHandler = (name) => {
     setCategoryName(name);
-    listProducts(dispatch, categoryName);
   };
 
   return (
