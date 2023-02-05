@@ -43,6 +43,9 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     margin: 10
   },
+  title: {
+    marginTop: 18
+  },
   space: {
     padding: 10
   },
