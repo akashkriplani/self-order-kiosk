@@ -4,7 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ChooseScreen from './screens/ChooseScreen';
 import HomeScreen from './screens/HomeScreen';
 import OrderScreen from './screens/OrderScreen';
+import PaymentScreen from './screens/PaymentScreen';
 import ReviewScreen from './screens/ReviewScreen';
+import SelectPaymentScreen from './screens/SelectPaymentScreen';
 
 const theme = createTheme({
   typography: {
@@ -43,6 +45,8 @@ function App() {
               <Route path="/choose" element={<ChooseScreen />} exact></Route>
               <Route path="/order" element={<OrderScreen />} exact></Route>
               <Route path="/review" element={<ReviewScreen />} exact></Route>
+              <Route path="/select-payment" element={<SelectPaymentScreen />} exact></Route>
+              <Route path="/payment" element={<PaymentScreen />} exact></Route>
             </Routes>
           </Paper>
         </Container>
