@@ -9,7 +9,8 @@ import {
   PRODUCT_LIST_FAILURE,
   ORDER_ADD_ITEM,
   ORDER_REMOVE_ITEM,
-  ORDER_CLEAR
+  ORDER_CLEAR,
+  ORDER_SET_PAYMENT_TYPE
 } from './Constants';
 
 export const setOrderType = (dispatch, orderType) => {
@@ -49,4 +50,8 @@ export const removeFromOrder = async (dispatch, item) => {
 
 export const clearOrder = async (dispatch) => {
   dispatch({ type: ORDER_CLEAR });
+};
+
+export const setPaymentType = async (dispatch, paymentType) => {
+  return dispatch({ type: ORDER_SET_PAYMENT_TYPE, payload: paymentType });
 };

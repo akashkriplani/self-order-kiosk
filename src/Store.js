@@ -9,7 +9,8 @@ import {
   PRODUCT_LIST_FAILURE,
   ORDER_ADD_ITEM,
   ORDER_REMOVE_ITEM,
-  ORDER_CLEAR
+  ORDER_CLEAR,
+  ORDER_SET_PAYMENT_TYPE
 } from './Constants';
 
 export const Store = createContext();
@@ -22,17 +23,13 @@ const initialState = {
     orderItems: [],
     taxPrice: 0,
     totalPrice: 0,
-    itemsCount: 0
+    itemsCount: 0,
+    paymentType: 'Pay here'
   }
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ORDER_SET_TYPE:
-      return {
-        ...state,
-        order: { ...state.order, orderType: action.payload }
-      };
     case CATEGORY_LIST_REQUEST:
       return {
         ...state,
@@ -116,6 +113,16 @@ const reducer = (state, action) => {
           totalPrice: 0,
           itemsCount: 0
         }
+      };
+    case ORDER_SET_TYPE:
+      return {
+        ...state,
+        order: { ...state.order, orderType: action.payload }
+      };
+    case ORDER_SET_PAYMENT_TYPE:
+      return {
+        ...state,
+        order: { ...state.order, paymentType: action.payload }
       };
     default:
       return state;
