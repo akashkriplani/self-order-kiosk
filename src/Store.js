@@ -19,7 +19,10 @@ const initialState = {
   productList: { loading: true },
   order: {
     orderType: 'Eat in',
-    orderItems: []
+    orderItems: [],
+    taxPrice: 0,
+    totalPrice: 0,
+    itemsCount: 0
   }
 };
 
