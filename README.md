@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install --legacy-peer-deps`
+
+Runs the dependencies in your application.
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -68,3 +72,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### `Database Setup on MongoDB`
+
+Set up your MongoDB database and update your mongoDB URL in the .env file.
+Try using username and password as admin.
