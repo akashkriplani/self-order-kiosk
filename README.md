@@ -77,3 +77,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Set up your MongoDB database and update your mongoDB URL in the .env file.
 Try using username and password as admin.
+Create the database on the MongoDB Atlas and update the cluster URL to .env file.
