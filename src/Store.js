@@ -6,7 +6,10 @@ import {
   ORDER_SET_TYPE,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
-  PRODUCT_LIST_FAILURE
+  PRODUCT_LIST_FAILURE,
+  ORDER_ADD_ITEM,
+  ORDER_REMOVE_ITEM,
+  ORDER_CLEAR
 } from './Constants';
 
 export const Store = createContext();
@@ -15,7 +18,8 @@ const initialState = {
   categoryList: { loading: true },
   productList: { loading: true },
   order: {
-    orderType: 'Eat in'
+    orderType: 'Eat in',
+    orderItems: []
   }
 };
 
@@ -55,6 +59,60 @@ const reducer = (state, action) => {
       return {
         ...state,
         productList: { loading: false, error: action.payload }
+      };
+    case ORDER_ADD_ITEM: {
+      const item = action.payload;
+      const itemExists = state.order.orderItems.find((x) => x.name === item.name);
+
+      const orderItems = itemExists
+        ? state.order.orderItems.map((x) => (x.name === itemExists.name ? item : x))
+        : [...state.order.orderItems, item];
+
+      const itemsCount = orderItems.reduce((a, c) => a + c.quantity, 0);
+      const itemsPrice = orderItems.reduce((a, c) => a + c.quantity * c.price, 0);
+      const taxPrice = Math.round(0.05 * itemsPrice * 100) / 100;
+
+      const totalPrice = Math.round((itemsPrice + taxPrice) * 100) / 100;
+
+      return {
+        ...state,
+        order: {
+          ...state.order,
+          orderItems,
+          taxPrice,
+          totalPrice,
+          itemsCount
+        }
+      };
+    }
+    case ORDER_REMOVE_ITEM:
+      const orderItems = state.order.orderItems.filter((x) => x.name !== action.payload.name);
+
+      const itemsCount = orderItems.reduce((a, c) => a + c.quantity, 0);
+      const itemsPrice = orderItems.reduce((a, c) => a + c.quantity * c.price, 0);
+      const taxPrice = Math.round(0.05 * itemsPrice * 100) / 100;
+
+      const totalPrice = Math.round((itemsPrice + taxPrice) * 100) / 100;
+
+      return {
+        ...state,
+        order: {
+          ...state.order,
+          orderItems,
+          taxPrice,
+          totalPrice,
+          itemsCount
+        }
+      };
+    case ORDER_CLEAR:
+      return {
+        ...state,
+        order: {
+          orderItems: [],
+          taxPrice: 0,
+          totalPrice: 0,
+          itemsCount: 0
+        }
       };
     default:
       return state;
