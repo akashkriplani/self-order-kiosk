@@ -10,7 +10,10 @@ import {
   ORDER_ADD_ITEM,
   ORDER_REMOVE_ITEM,
   ORDER_CLEAR,
-  ORDER_SET_PAYMENT_TYPE
+  ORDER_SET_PAYMENT_TYPE,
+  ORDER_CREATE_REQUEST,
+  ORDER_CREATE_SUCCESS,
+  ORDER_CREATE_FAILURE
 } from './Constants';
 
 export const Store = createContext();
@@ -25,6 +28,9 @@ const initialState = {
     totalPrice: 0,
     itemsCount: 0,
     paymentType: 'Pay here'
+  },
+  orderCreate: {
+    loading: true
   }
 };
 
@@ -123,6 +129,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         order: { ...state.order, paymentType: action.payload }
+      };
+    case ORDER_CREATE_REQUEST:
+      return {
+        ...state,
+        orderCreate: { loading: true }
+      };
+    case ORDER_CREATE_SUCCESS:
+      return {
+        ...state,
+        orderCreate: { loading: false, newOrder: action.payload }
+      };
+    case ORDER_CREATE_FAILURE:
+      return {
+        ...state,
+        orderCreate: { loading: false, error: action.payload }
       };
     default:
       return state;
