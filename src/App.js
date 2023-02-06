@@ -2,6 +2,7 @@ import { Container, CssBaseline, Paper, ThemeProvider } from '@material-ui/core'
 import { createTheme } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ChooseScreen from './screens/ChooseScreen';
+import CompleteOrderScreen from './screens/CompleteOrderScreen';
 import HomeScreen from './screens/HomeScreen';
 import OrderScreen from './screens/OrderScreen';
 import PaymentScreen from './screens/PaymentScreen';
@@ -47,6 +48,7 @@ function App() {
               <Route path="/review" element={<ReviewScreen />} exact></Route>
               <Route path="/select-payment" element={<SelectPaymentScreen />} exact></Route>
               <Route path="/payment" element={<PaymentScreen />} exact></Route>
+              <Route path="/complete" element={<CompleteOrderScreen />} exact></Route>
             </Routes>
           </Paper>
         </Container>
