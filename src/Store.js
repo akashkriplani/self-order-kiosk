@@ -13,12 +13,17 @@ import {
   ORDER_SET_PAYMENT_TYPE,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
-  ORDER_CREATE_FAILURE
+  ORDER_CREATE_FAILURE,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAILURE,
+  SCREEN_SET_WIDTH
 } from './Constants';
 
 export const Store = createContext();
 
 const initialState = {
+  widthScreen: false,
   categoryList: { loading: true },
   productList: { loading: true },
   order: {
@@ -29,13 +34,17 @@ const initialState = {
     itemsCount: 0,
     paymentType: 'Pay here'
   },
-  orderCreate: {
-    loading: true
-  }
+  orderCreate: { loading: true },
+  orderList: { loading: true }
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case SCREEN_SET_WIDTH:
+      return {
+        ...state,
+        widthScreen: true
+      };
     case CATEGORY_LIST_REQUEST:
       return {
         ...state,
@@ -144,6 +153,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         orderCreate: { loading: false, error: action.payload }
+      };
+    case ORDER_LIST_REQUEST:
+      return {
+        ...state,
+        orderList: { loading: true }
+      };
+    case ORDER_LIST_SUCCESS:
+      return {
+        ...state,
+        orderList: { loading: false, orders: action.payload, error: '' }
+      };
+    case ORDER_LIST_FAILURE:
+      return {
+        ...state,
+        orderList: { loading: false, error: action.payload }
       };
     default:
       return state;

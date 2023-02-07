@@ -13,7 +13,11 @@ import {
   ORDER_SET_PAYMENT_TYPE,
   ORDER_CREATE_FAILURE,
   ORDER_CREATE_REQUEST,
-  ORDER_CREATE_SUCCESS
+  ORDER_CREATE_SUCCESS,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAILURE,
+  SCREEN_SET_WIDTH
 } from './Constants';
 
 export const setOrderType = (dispatch, orderType) => {
@@ -67,5 +71,16 @@ export const createOrder = async (dispatch, order) => {
     dispatch({ type: ORDER_CLEAR });
   } catch (err) {
     dispatch({ type: ORDER_CREATE_FAILURE, payload: err.message });
+  }
+};
+
+export const listOrders = async (dispatch) => {
+  dispatch({ type: SCREEN_SET_WIDTH });
+  dispatch({ type: ORDER_LIST_REQUEST });
+  try {
+    const { data } = await axios.get('/api/orders');
+    dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: ORDER_LIST_FAILURE, payload: err.message });
   }
 };
