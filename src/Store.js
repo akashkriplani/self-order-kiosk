@@ -17,7 +17,10 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAILURE,
-  SCREEN_SET_WIDTH
+  SCREEN_SET_WIDTH,
+  ORDER_QUEUE_LIST_REQUEST,
+  ORDER_QUEUE_LIST_SUCCESS,
+  ORDER_QUEUE_LIST_FAILURE
 } from './Constants';
 
 export const Store = createContext();
@@ -35,7 +38,8 @@ const initialState = {
     paymentType: 'Pay here'
   },
   orderCreate: { loading: true },
-  orderList: { loading: true }
+  orderList: { loading: true },
+  queueList: { loading: true }
 };
 
 const reducer = (state, action) => {
@@ -168,6 +172,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         orderList: { loading: false, error: action.payload }
+      };
+    case ORDER_QUEUE_LIST_REQUEST:
+      return {
+        ...state,
+        queueList: { loading: true }
+      };
+    case ORDER_QUEUE_LIST_SUCCESS:
+      return {
+        ...state,
+        queueList: { loading: false, queue: action.payload, error: '' }
+      };
+    case ORDER_QUEUE_LIST_FAILURE:
+      return {
+        ...state,
+        queueList: { loading: false, error: action.payload }
       };
     default:
       return state;

@@ -17,7 +17,10 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAILURE,
-  SCREEN_SET_WIDTH
+  SCREEN_SET_WIDTH,
+  ORDER_QUEUE_LIST_REQUEST,
+  ORDER_QUEUE_LIST_SUCCESS,
+  ORDER_QUEUE_LIST_FAILURE
 } from './Constants';
 
 export const setOrderType = (dispatch, orderType) => {
@@ -82,5 +85,16 @@ export const listOrders = async (dispatch) => {
     dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
   } catch (err) {
     dispatch({ type: ORDER_LIST_FAILURE, payload: err.message });
+  }
+};
+
+export const listQueue = async (dispatch) => {
+  dispatch({ type: SCREEN_SET_WIDTH });
+  dispatch({ type: ORDER_QUEUE_LIST_REQUEST });
+  try {
+    const { data } = await axios.get('/api/orders/queue');
+    dispatch({ type: ORDER_QUEUE_LIST_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: ORDER_QUEUE_LIST_FAILURE, payload: err.message });
   }
 };
