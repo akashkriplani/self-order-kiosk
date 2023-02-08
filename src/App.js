@@ -10,6 +10,7 @@ import OrderScreen from './screens/OrderScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import ReviewScreen from './screens/ReviewScreen';
 import SelectPaymentScreen from './screens/SelectPaymentScreen';
+import QueueScreen from './screens/QueueScreen';
 import { Store } from './Store';
 
 const theme = createTheme({
@@ -55,6 +56,7 @@ function App() {
               <Route path="/payment" element={<PaymentScreen />} exact></Route>
               <Route path="/complete" element={<CompleteOrderScreen />} exact></Route>
               <Route path="/admin" element={<AdminScreen />} exact></Route>
+              <Route path="/queue" element={<QueueScreen />} exact></Route>
             </Routes>
           </Paper>
         </Container>
